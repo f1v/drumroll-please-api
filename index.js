@@ -2,20 +2,29 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000
 const db = require('./models/index')
+const cors = require('cors')
 const {
   Loop,
   Module
 } = db
 const bodyParser = require('body-parser').json()
 
+app.use(cors())
+
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Drumroll Please . . . ')
 })
 
 app.get('/modules', async (req, res) => {
   const modules = await Module.findAll()
   console.log(modules)
   res.send(modules)
+})
+
+app.get('/modules/:id', async (req, res) => {
+  const { id } = req.params
+  const module = await Module.findByPk(id)
+  res.send(module)
 })
 
 app.post('/modules', bodyParser, async (req, res) => {

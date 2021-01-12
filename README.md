@@ -8,6 +8,8 @@ GET '/loops'
 
 GET '/modules'
 
+GET '/modules/:id'
+
 GET '/loops/:id'
 
 POST '/loops'
